@@ -1,0 +1,26 @@
+name: Daily Commit Workflow
+
+on:
+  schedule:
+    # This cron expression runs the workflow at 12:00 PM UTC every day
+    - cron: '0 12 * * *'
+
+jobs:
+  commit_job:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Step 2: Create a commit with your email in the name
+      - name: Create commit with email 21f3001383@ds.study.iitm.ac.in
+        run: |
+          # Create a new file or modify an existing file
+          echo "Daily commit update" > daily_commit.txt
+          git add daily_commit.txt
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "21f3001383@ds.study.iitm.ac.in"
+          git commit -m "Daily commit by GitHub Actions"
+          git push
